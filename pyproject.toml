@@ -1,9 +1,4 @@
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["."]
 testpaths = ["tests"]
 
-[project]
-name = "ci-pipeline-project"
-version = "0.1.0"
-description = "Simple CI pipeline with failing test"
-requires-python = ">=3.10"
