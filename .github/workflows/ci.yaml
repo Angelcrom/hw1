@@ -1,0 +1,43 @@
+name: CI Pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # [ LOAD ] Checkout Code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # [ INSTALL ] Python Dependencies
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest flake8
+
+      # [ SCAN ] Lint with Flake8 (Logic Errors Only)
+      - name: Run Flake8
+        run: flake8 .
+
+      # [ TEST ] Run Pytest
+      - name: Run Tests
+        run: pytest
+
+      # THE "MYSTERY_BOX" ARTIFACT
+      - name: Generate mystery artifact
+        run: echo "The pipeline has run successfully (or failed!)" > mystery_box.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MYSTERY_BOX
+          path: mystery_box.txt
