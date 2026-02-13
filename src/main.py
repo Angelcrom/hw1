@@ -6,7 +6,7 @@ def conversion(value):
     return value * 9 / 5 + 32
 
 # Is the average > 50?
-def is_strong(values):
+def is_strong(values)
     if not values:
         return False
     average = sum(values) / len(values)
